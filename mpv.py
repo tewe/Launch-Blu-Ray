@@ -13,7 +13,7 @@ def isdvd(path):
 def execmpv(path):
     if isbd(path):
         path = os.path.dirname(path)
-        os.execl(MPV, 'mpv','bd://1', 'bd://2', 'bd://3', 'bd://4', '--bluray-device=' + path)
+        os.execl(MPV, 'mpv', 'bd://0', 'bd://1', 'bd://2', 'bd://3', 'bd://4', '--bluray-device=' + path)
     elif isdvd(path):
         os.execl(MPV, 'mpv', 'dvd://', '--dvd-device=' + path)
     else:
