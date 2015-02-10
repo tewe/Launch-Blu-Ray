@@ -11,9 +11,11 @@ def isdvd(path):
     return ext.lower() == '.iso'
 
 def execmpv(path):
+    # TODO normalize https://github.com/mpv-player/mpv/issues/1027#issuecomment-72899151
     if isbd(path):
         path = os.path.dirname(path)
-        os.execl(MPV, 'mpv', 'bd://0', 'bd://1', 'bd://2', 'bd://3', 'bd://4', '--bluray-device=' + path)
+        args = ['bd://%i' % i for i in range(9)] + ['--bluray-device=%s' % path]
+        os.execl(MPV, 'mpv', *args)
     elif isdvd(path):
         os.execl(MPV, 'mpv', 'dvd://', '--dvd-device=' + path)
     else:
